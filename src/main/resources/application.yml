@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    username: root
+    url: jdbc:mysql://localhost:3306/page?useSSL=false&allowPublicKeyRetrieval=true
+    password: mysql
+  application:
+    name: Page
+  jpa:
+    properties:
+      hibernate:
+        format_sql: 'true'
+        use_sql_comments: 'true'
+        show_sql: 'true'
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
