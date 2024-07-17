@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.http.HttpStatus;
 
 import static com.springboot.page.common.response.BaseResponseStatus.SUCCESS;
 
@@ -20,7 +21,7 @@ public class BaseResponse<T> {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private final String message;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private T data; // 주의 : 제네릭 T는 final로 해주면 안됨
+    private T data;
     
     // 요청 성공
     public BaseResponse(T data){
@@ -28,6 +29,12 @@ public class BaseResponse<T> {
         this.code = SUCCESS.getCode();
         this.message = SUCCESS.getMessage();
         this.data = data;
+    }
+    // 요청 성공
+    public BaseResponse(){
+        this.isSuccess = BaseResponseStatus.NO_CONTENT.isSuccess();
+        this.code = BaseResponseStatus.NO_CONTENT.getCode();
+        this.message = BaseResponseStatus.NO_CONTENT.getMessage();
     }
 
     //요청 실패

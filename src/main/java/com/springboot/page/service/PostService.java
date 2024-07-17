@@ -1,6 +1,6 @@
 package com.springboot.page.service;
 
-import com.springboot.page.dto.PostResponseDto;
+import com.springboot.page.dto.PostDto;
 import com.springboot.page.entity.Post;
 import com.springboot.page.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,15 +19,15 @@ public class PostService {
 
     private final PostRepository postRepository;
 
-    public List<PostResponseDto> findAllPaging(Pageable pageable) {
+    public List<PostDto.PostResponseDto> findAllPaging(Pageable pageable) {
         Page<Post> postsPages = postRepository.findAll(pageable);
-        List<PostResponseDto> postResponseDtoPages = postsPages.map(PostResponseDto::from).getContent();
+        List<PostDto.PostResponseDto> postResponseDtoPages = postsPages.map(PostDto.PostResponseDto::from).getContent();
         return postResponseDtoPages;
     }
 
-    public List<PostResponseDto> findAll() {
+    public List<PostDto.PostResponseDto> findAll() {
         List<Post> postList = postRepository.findAll();
-        List<PostResponseDto> responseDtoList = postList.stream().map(PostResponseDto::from).collect(Collectors.toList());
+        List<PostDto.PostResponseDto> responseDtoList = postList.stream().map(PostDto.PostResponseDto::from).collect(Collectors.toList());
         return responseDtoList;
     }
 }

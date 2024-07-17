@@ -2,7 +2,7 @@ package com.springboot.page.controller;
 
 import com.springboot.page.common.response.BaseResponse;
 import com.springboot.page.common.response.BaseResponseStatus;
-import com.springboot.page.dto.PostResponseDto;
+import com.springboot.page.dto.PostDto;
 import com.springboot.page.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -21,8 +21,8 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping("/posts")
-    public BaseResponse<List<PostResponseDto>> getPost(@RequestParam(required = false) Integer page) {
-        List<PostResponseDto> postResponseDtoList;
+    public BaseResponse<List<PostDto.PostResponseDto>> getPost(@RequestParam(required = false) Integer page) {
+        List<PostDto.PostResponseDto> postResponseDtoList;
         if (page == null) {
             postResponseDtoList = postService.findAll(); // 페이지가 없는 전체 목록을 출력할 때
         } else {
@@ -40,6 +40,6 @@ public class PostController {
 
         // CustomResponse를 이용하여 응답 전달
         return postResponseDtoList != null && !postResponseDtoList.isEmpty() ?
-                new BaseResponse<>(postResponseDtoList) : new BaseResponse<>(BaseResponseStatus.NOT_FOUND);
+                new BaseResponse<>(postResponseDtoList) : new BaseResponse<>();
     }
 }
